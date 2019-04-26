@@ -628,8 +628,8 @@ AgpsStateMachine::AgpsStateMachine(servicerType servType,
     mAPN(NULL),
     mAPNLen(0),
     mBearer(APN_IP_INVALID),
-    mEnforceSingleSubscriber(enforceSingleSubscriber),
-    mServicer(Servicer :: getServicer(servType, (void *)cb_func))
+    mServicer(Servicer :: getServicer(servType, (void *)cb_func)),
+    mEnforceSingleSubscriber(enforceSingleSubscriber)
 {
     linked_list_init(&mSubscribers);
 
@@ -688,7 +688,7 @@ void AgpsStateMachine::setAPN(const char* apn, unsigned int len)
     if (NULL != apn) {
         mAPN = new char[len+1];
         memcpy(mAPN, apn, len);
-        mAPN[len] = NULL;
+        mAPN[len] = 0;
 
         mAPNLen = len;
     } else {

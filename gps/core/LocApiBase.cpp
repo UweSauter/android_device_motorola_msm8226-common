@@ -98,7 +98,7 @@ struct LocSsrMsg : public LocMsg {
     inline void locallog() {
         LOC_LOGV("LocSsrMsg");
     }
-    inline virtual void log() {
+    inline virtual void log() const {
         locallog();
     }
 };
@@ -119,14 +119,14 @@ struct LocOpenMsg : public LocMsg {
         LOC_LOGV("%s:%d]: LocOpen Mask: %x\n",
                  __func__, __LINE__, mMask);
     }
-    inline virtual void log() {
+    inline virtual void log() const {
         locallog();
     }
 };
 
 LocApiBase::LocApiBase(const MsgTask* msgTask,
                        LOC_API_ADAPTER_EVENT_MASK_T excludedMask) :
-    mExcludedMask(excludedMask), mMsgTask(msgTask), mMask(0)
+    mMsgTask(msgTask), mExcludedMask(excludedMask), mMask(0)
 {
     memset(mLocAdapters, 0, sizeof(mLocAdapters));
 }

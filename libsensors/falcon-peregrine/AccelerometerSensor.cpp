@@ -133,7 +133,6 @@ int AccelerometerSensor::setDelay(int32_t handle, int64_t ns)
 {
     int delay = ns / 1000000;
     int ret;
-    int fd;
 
     switch (handle) {
     case ID_A:
