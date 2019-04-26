@@ -624,12 +624,13 @@ AgpsStateMachine::AgpsStateMachine(servicerType servType,
                                    void *cb_func,
                                    AGpsExtType type,
                                    bool enforceSingleSubscriber) :
-    mStatePtr(new AgpsReleasedState(this)),mType(type),
+    mServicer(Servicer :: getServicer(servType, (void *)cb_func)),
+    mType(type),
+    mEnforceSingleSubscriber(enforceSingleSubscriber),
+    mStatePtr(new AgpsReleasedState(this)),
     mAPN(NULL),
     mAPNLen(0),
-    mBearer(APN_IP_INVALID),
-    mServicer(Servicer :: getServicer(servType, (void *)cb_func)),
-    mEnforceSingleSubscriber(enforceSingleSubscriber)
+    mBearer(APN_IP_INVALID)
 {
     linked_list_init(&mSubscribers);
 
